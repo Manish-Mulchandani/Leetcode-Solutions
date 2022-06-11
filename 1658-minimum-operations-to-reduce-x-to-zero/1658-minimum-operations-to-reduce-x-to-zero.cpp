@@ -3,8 +3,8 @@ public:
     int minOperations(vector<int>& nums, int x) {
         /*M-II*/
         int n=nums.size();
-        map<int,int> A;
-        map<int,int> B;
+        unordered_map<int,int> A;
+        unordered_map<int,int> B;
         int a=0;
         for(int i=0; i<n; i++)
         {
