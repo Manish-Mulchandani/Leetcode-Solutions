@@ -1,6 +1,40 @@
 class Solution {
 public:
     int minOperations(vector<int>& nums, int x) {
+        /*M-II*/
+        int n=nums.size();
+        map<int,int> A;
+        map<int,int> B;
+        int a=0;
+        for(int i=0; i<n; i++)
+        {
+            a+=nums[i];
+            A[a]=i+1;
+        }
+        a=0;
+        for(int i=0; i<n; i++)
+        {
+            a+=nums[n-i-1];
+            B[a]=i+1;
+        }
+        int ans=INT_MAX;
+        if(A.find(x)!=A.end())
+            ans=min(ans,A[x]);
+        if(B.find(x)!=B.end())
+            ans=min(ans,B[x]);
+        int b=0;
+        for(int i=0; i<n; i++)
+        {
+            b+=nums[i];
+            if(B.find(x-b)!=B.end())
+                ans=min(ans,i+1+B[x-b]);
+        }
+        //cout<<ans<<endl;
+        if(ans>n)
+            return -1;
+        return ans;
+        
+        /* M-I
         int sum=0,n=nums.size();
         int flag=0;
         for(auto &i:nums)
@@ -57,7 +91,7 @@ public:
         if(ans==INT_MAX)
             return -1;
         else 
-            return ans;
+            return ans; */
             
     }
 };
