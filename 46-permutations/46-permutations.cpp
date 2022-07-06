@@ -1,6 +1,30 @@
 class Solution {
 public:
     
+    void f(vector<int> &nums,vector<vector<int>> &ans, vector<int> &A, int i)
+    {
+        if(i==nums.size())
+        {
+            ans.push_back(nums);
+            return ;
+        }
+        for(int j=i; j<nums.size(); j++)
+        {
+            swap(nums[j], nums[i]);
+            f(nums,ans,A,i+1);
+            swap(nums[j], nums[i]);
+        }
+    }
+    
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> ans;
+        vector<int> A;
+        f(nums,ans,A,0);
+        return ans;
+    }
+    
+    
+    /* M_I  -- More space complexity
     void f(vector<int> &nums, vector<vector<int>> &ans, vector<int> &A, vector<bool> &B)
     {
         if(A.size()==nums.size())
@@ -26,6 +50,6 @@ public:
         vector<int> A;
         vector<bool> B(nums.size(),false);
         f(nums,ans,A,B);
-            return ans;
-    }
+        return ans;
+    }*/
 };
