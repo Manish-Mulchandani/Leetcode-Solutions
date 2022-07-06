@@ -1,7 +1,7 @@
 class Solution {
 public:
-    
-    void f(vector<int> &nums,vector<vector<int>> &ans, vector<int> &A, int i)
+    /* M-II -- By swapping  */
+    void f(vector<int> &nums,vector<vector<int>> &ans, int i)
     {
         if(i==nums.size())
         {
@@ -11,15 +11,15 @@ public:
         for(int j=i; j<nums.size(); j++)
         {
             swap(nums[j], nums[i]);
-            f(nums,ans,A,i+1);
+            f(nums,ans,i+1);
             swap(nums[j], nums[i]);
         }
     }
     
     vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int>> ans;
-        vector<int> A;
-        f(nums,ans,A,0);
+        //vector<int> A;
+        f(nums,ans,0);
         return ans;
     }
     
