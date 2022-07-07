@@ -1,37 +1,60 @@
 class Solution {
 public:
-    std::vector<std::vector<std::string> > solveNQueens(int n) {
-        std::vector<std::vector<std::string> > res;
-        std::vector<std::string> nQueens(n, std::string(n, '.'));
-        solveNQueens(res, nQueens, 0, n);
-        return res;
-    }
-private:
-    void solveNQueens(std::vector<std::vector<std::string> > &res, std::vector<std::string> &nQueens, int row, int &n) {
-        if (row == n) {
-            res.push_back(nQueens);
-            return;
+    
+    bool check(int row, int col, vector<string> &A, int n)
+    {
+        for(int i=0; i<row; i++)
+        {
+            if(A[i][col]=='Q')
+                return false;
         }
-        for (int col = 0; col != n; ++col)
-            if (isValid(nQueens, row, col, n)) {
-                nQueens[row][col] = 'Q';
-                solveNQueens(res, nQueens, row + 1, n);
-                nQueens[row][col] = '.';
-            }
-    }
-    bool isValid(std::vector<std::string> &nQueens, int row, int col, int &n) {
-        //check if the column had a queen before.
-        for (int i = 0; i != row; ++i)
-            if (nQueens[i][col] == 'Q')
+        int r1=row-1,c1=col-1;
+        while(r1>=0 && c1>=0)
+        {
+            if(A[r1][c1]=='Q')
                 return false;
-        //check if the 45° diagonal had a queen before.
-        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; --i, --j)
-            if (nQueens[i][j] == 'Q')
+            r1--;
+            c1--;
+        }
+        r1=row-1;
+        c1=col+1;
+        while(r1>=0 && c1<n)
+        {
+            if(A[r1][c1]=='Q')
                 return false;
-        //check if the 135° diagonal had a queen before.
-        for (int i = row - 1, j = col + 1; i >= 0 && j < n; --i, ++j)
-            if (nQueens[i][j] == 'Q')
-                return false;
+            r1--;
+            c1++;
+        }
         return true;
+        
+    }
+    
+    void f(vector<vector<string>> &ans, vector<string> &A, int row, int n)
+    {
+        if(row==n)
+        {
+            ans.push_back(A);
+            return ;
+        }
+        for(int i=0; i<n; i++)
+        {
+            if(check(row,i,A,n))
+            {
+                A[row][i]='Q';
+                f(ans,A,row+1,n);
+                A[row][i]='.';
+            }
+        }
+        
+    }
+    
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> ans;
+        vector<string> A(n);
+        string s(n,'.');
+        for(int i=0; i<n; i++)
+            A[i]=s;
+        f(ans,A,0,n);
+        return ans;
     }
 };
