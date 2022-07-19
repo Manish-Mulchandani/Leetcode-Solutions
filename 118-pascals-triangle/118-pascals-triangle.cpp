@@ -1,17 +1,17 @@
 class Solution {
 public:
     vector<vector<int>> generate(int num) {
-        vector<vector<int>> A(num);
+        vector<vector<int>> ans(num);
         for(int i=0; i<num; i++)
         {
-            A[i].resize(i+1);
-            A[i][0]=1;
-            A[i][i]=1;
+            ans[i].resize(i+1);
+            ans[i][0]=1;
+            ans[i][i]=1;
             for(int j=1; j<i; j++)
             {
-                A[i][j]=A[i-1][j-1]+A[i-1][j];
+                ans[i][j]=ans[i-1][j-1]+ans[i-1][j];
             }
         }
-        return A;
+        return ans;
     }
 };
