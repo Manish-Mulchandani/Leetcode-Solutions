@@ -17,7 +17,26 @@ public:
         return max(a,b);
     }*/
     
-    /*M-III*/
+    /*M-IV optimized space*/
+    
+    int rob(vector<int> &nums){
+        int n=nums.size();
+        int a=nums[0],b=0;
+        int take,nottake;
+        for(int i=1; i<n; i++)
+        {
+            take=nums[i];
+            if(i>1)
+                take+=b;
+            nottake=a;
+            b=a;
+            a=max(take,nottake);
+        }
+        return a;
+    }
+    
+    
+    /*M-III Tabulation
     int rob(vector<int> &nums){
         int n=nums.size();
         vector<int> dp(n,-1);
@@ -32,7 +51,7 @@ public:
             dp[i]=max(take,nottake);
         }
         return dp[n-1];
-    }
+    }*/
     
     /* M-II Memoization
     int f(vector<int> &nums, int n,vector<int> &dp)
