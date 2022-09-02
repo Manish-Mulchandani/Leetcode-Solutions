@@ -17,6 +17,24 @@ public:
         return max(a,b);
     }*/
     
+    /*M-III*/
+    int rob(vector<int> &nums){
+        int n=nums.size();
+        vector<int> dp(n,-1);
+        dp[0]=nums[0];
+        int take,nottake;
+        for(int i=1; i<n; i++)
+        {
+            take=nums[i];
+            if(i>1)
+                take+=dp[i-2];
+            nottake=dp[i-1];
+            dp[i]=max(take,nottake);
+        }
+        return dp[n-1];
+    }
+    
+    /* M-II Memoization
     int f(vector<int> &nums, int n,vector<int> &dp)
     {
         if(n<0)
@@ -32,7 +50,7 @@ public:
         vector<int> dp(nums.size(),-1);
         f(nums,nums.size()-1,dp);
         return dp[nums.size()-1];
-    }
+    }*/
     
     /* M-I Recursion
     int f(vector<int> &nums, int n)
