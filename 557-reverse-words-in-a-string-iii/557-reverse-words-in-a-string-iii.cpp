@@ -1,6 +1,33 @@
 class Solution {
 public:
     string reverseWords(string s) {
+        int j=0,k;
+        for(int i=0; i<s.length(); i++)
+        {
+            if(s[i]==' ')
+            {
+                k=i-1;
+                while(j<k)
+                {
+                    swap(s[j],s[k]);
+                    j++;
+                    k--;
+                }
+                j=i+1;
+            }
+        }
+        k=s.length()-1;
+        while(j<k)
+        {
+            swap(s[j],s[k]);
+            j++;
+            k--;
+        }
+        return s;
+        
+    }
+    /* M-II
+    string reverseWords(string s) {
         string word="";
         string ans="";
         for(auto &i:s)
@@ -18,7 +45,7 @@ public:
         reverse(word.begin(), word.end());
         ans.append(word);
         return ans;
-    }
+    }*/
     /*M-I
     string reverseWords(string s) {
         string word="";
